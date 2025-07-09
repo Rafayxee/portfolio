@@ -30,58 +30,132 @@ class PortfolioPage extends StatelessWidget {
         slivers: [
           CustomAppBar(),
           SliverToBoxAdapter(
-            child: Center(
-              child: Container(
-                constraints: BoxConstraints(
-                  maxWidth: ResponsiveUtils.getMaxContentWidth(context),
+            child: Column(
+              children: [
+                SizedBox(height: 40),
+                SizedBox(
+                  width: double.infinity,
+                  child: Center(
+                    child: ResponsiveUtils.buildHeroContainer(
+                      context: context,
+                      child: HeroSection(key: controller.heroKey),
+                    ),
+                  ),
                 ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: ResponsiveUtils.getResponsivePadding(context),
+
+                SizedBox(
+                  height: ResponsiveUtils.getVerticalSpacing(context) * 2,
+                ),
+
+                // Main content sections with better responsive layout
+                _buildContentSection(
+                  context: context,
+                  child: ProjectsSection(key: controller.projectsKey),
+                ),
+
+                SizedBox(
+                  height: ResponsiveUtils.getVerticalSpacing(context) * 2,
+                ),
+
+                _buildContentSection(
+                  context: context,
+                  child: SkillsSection(key: controller.skillsKey),
+                ),
+
+                SizedBox(
+                  height: ResponsiveUtils.getVerticalSpacing(context) * 2,
+                ),
+
+                _buildContentSection(
+                  context: context,
+                  child: ExperienceSection(key: controller.experienceKey),
+                ),
+
+                SizedBox(
+                  height: ResponsiveUtils.getVerticalSpacing(context) * 2,
+                ),
+
+                _buildContentSection(
+                  context: context,
+                  child: ContactSection(key: controller.contactKey),
+                ),
+
+                SizedBox(
+                  height: ResponsiveUtils.getVerticalSpacing(context) * 2,
+                ),
+              ],
+            ),
+          ),
+
+          // Footer
+          SliverToBoxAdapter(
+            child: Container(
+              padding: ResponsiveUtils.getSectionPadding(context),
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Color(0xFF283039), width: 1),
+                ),
+              ),
+              child: Center(
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: ResponsiveUtils.getMaxContentWidth(context),
                   ),
                   child: Column(
                     children: [
-                      const SizedBox(height: 40),
-                      HeroSection(key: controller.heroKey),
-                      const SizedBox(height: 64),
-                      ProjectsSection(key: controller.projectsKey),
-                      const SizedBox(height: 64),
-                      SkillsSection(key: controller.skillsKey),
-                      const SizedBox(height: 64),
-                      ExperienceSection(key: controller.experienceKey),
-                      const SizedBox(height: 64),
-                      ContactSection(key: controller.contactKey),
-                      const SizedBox(height: 64),
+                      Text(
+                        '© 2024 Abdul Rafay. All rights reserved.',
+                        style: TextStyle(
+                          color: const Color(0xFF9cabba),
+                          fontSize: ResponsiveUtils.getResponsiveFontSize(
+                            context,
+                            mobile: 14,
+                            tablet: 14,
+                            desktop: 15,
+                          ),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Designed with passion and Flutter.',
+                        style: TextStyle(
+                          color: const Color(0xFF9cabba),
+                          fontSize: ResponsiveUtils.getResponsiveFontSize(
+                            context,
+                            mobile: 12,
+                            tablet: 12,
+                            desktop: 13,
+                          ),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 32),
-              decoration: const BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: Color(0xFF283039), width: 1),
-                ),
-              ),
-              child: const Column(
-                children: [
-                  Text(
-                    '© 2024 Abdul Rafay. All rights reserved.',
-                    style: TextStyle(color: Color(0xFF9cabba), fontSize: 14),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Designed with passion and Flutter.',
-                    style: TextStyle(color: Color(0xFF9cabba), fontSize: 12),
-                  ),
-                ],
-              ),
-            ),
-          ),
         ],
+      ),
+    );
+  }
+
+  // Helper method to build content sections with proper responsive layout
+  Widget _buildContentSection({
+    required BuildContext context,
+    required Widget child,
+  }) {
+    return Container(
+      width: double.infinity,
+      padding: ResponsiveUtils.getSectionPadding(context),
+      child: Center(
+        child: Container(
+          constraints: BoxConstraints(
+            maxWidth: ResponsiveUtils.getMaxContentWidth(context),
+          ),
+          child: child,
+        ),
       ),
     );
   }

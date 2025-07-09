@@ -18,7 +18,7 @@ class HeroSection extends StatelessWidget {
         border: Border.all(color: const Color(0xFF283039)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -51,7 +51,7 @@ class HeroSection extends StatelessWidget {
           shape: BoxShape.circle,
           border: Border.all(color: const Color(0xFF0c7ff2), width: 4),
           image: const DecorationImage(
-            image: NetworkImage('assets/images/profilepic.png'),
+            image: AssetImage('assets/images/profilepic.png'),
             fit: BoxFit.cover,
           ),
         ),

@@ -97,21 +97,21 @@ class ProjectsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(12),
                 ),
                 image: DecorationImage(
-                  image: NetworkImage(project['image']!),
+                  image: AssetImage(project['image']!),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
