@@ -13,13 +13,20 @@ class PortfolioController extends GetxController {
   // Reactive variables
   var isLoading = false.obs;
   var selectedSection = 'hero'.obs;
+  var selectedCategory = 'All'.obs;
 
   // Section keys for navigation
   final GlobalKey heroKey = GlobalKey();
+  final GlobalKey servicesKey = GlobalKey();
   final GlobalKey projectsKey = GlobalKey();
   final GlobalKey skillsKey = GlobalKey();
   final GlobalKey experienceKey = GlobalKey();
   final GlobalKey contactKey = GlobalKey();
+
+  // Method to change project category
+  void changeCategory(String category) {
+    selectedCategory.value = category;
+  }
 
   @override
   void onInit() {
@@ -34,8 +41,6 @@ class PortfolioController extends GetxController {
   }
 
   void _updateSelectedSection() {
-    final scrollOffset = scrollController.offset;
-
     if (_isKeyVisible(contactKey)) {
       selectedSection.value = 'contact';
     } else if (_isKeyVisible(experienceKey)) {
@@ -44,6 +49,8 @@ class PortfolioController extends GetxController {
       selectedSection.value = 'skills';
     } else if (_isKeyVisible(projectsKey)) {
       selectedSection.value = 'projects';
+    } else if (_isKeyVisible(servicesKey)) {
+      selectedSection.value = 'services';
     } else {
       selectedSection.value = 'hero';
     }
@@ -65,6 +72,9 @@ class PortfolioController extends GetxController {
     GlobalKey? targetKey;
 
     switch (section) {
+      case 'services':
+        targetKey = servicesKey;
+        break;
       case 'projects':
         targetKey = projectsKey;
         break;
@@ -81,9 +91,9 @@ class PortfolioController extends GetxController {
         targetKey = heroKey;
     }
 
-    if (targetKey?.currentContext != null) {
+    if (targetKey.currentContext != null) {
       Scrollable.ensureVisible(
-        targetKey!.currentContext!,
+        targetKey.currentContext!,
         duration: const Duration(milliseconds: 800),
         curve: Curves.easeInOut,
       );

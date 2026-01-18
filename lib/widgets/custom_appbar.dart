@@ -12,7 +12,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<PortfolioController>();
-    _launcLinkedIn() async {
+    launcLinkedIn() async {
       const url = 'https://www.linkedin.com/in/abdul-rafay-mashoor-4b0934242';
       if (await canLaunchUrl(Uri.parse(url))) {
         await launchUrl(Uri.parse(url));
@@ -21,7 +21,7 @@ class CustomAppBar extends StatelessWidget {
       }
     }
 
-    _launchGithub() async {
+    launchGithub() async {
       const url = 'https://github.com/Rafayxee';
       if (await canLaunchUrl(Uri.parse(url))) {
         await launchUrl(Uri.parse(url));
@@ -88,6 +88,8 @@ class CustomAppBar extends StatelessWidget {
                     // Navigation items (desktop/tablet only)
                     if (ResponsiveUtils.isTablet(context) ||
                         ResponsiveUtils.isDesktop(context)) ...[
+                      _buildNavItem('Services', 'services', controller),
+                      const SizedBox(width: 32),
                       _buildNavItem('Projects', 'projects', controller),
                       const SizedBox(width: 32),
                       _buildNavItem('Skills', 'skills', controller),
@@ -104,12 +106,12 @@ class CustomAppBar extends StatelessWidget {
                         children: [
                           _buildSocialButton(
                             FontAwesomeIcons.linkedin,
-                            _launcLinkedIn,
+                            launcLinkedIn,
                           ),
                           const SizedBox(width: 12),
                           _buildSocialButton(
                             FontAwesomeIcons.github,
-                            _launchGithub,
+                            launchGithub,
                           ),
                           // const SizedBox(width: 12),
                           // _buildSocialButton(Icons.business, () {}),

@@ -10,6 +10,7 @@ import '../widgets/custom_appbar.dart';
 import '../widgets/experience_section.dart';
 import '../widgets/hero_section.dart';
 import '../widgets/project_section.dart';
+import '../widgets/services_section.dart';
 import '../widgets/skill_section.dart';
 
 class PortfolioPage extends StatelessWidget {
@@ -32,39 +33,49 @@ class PortfolioPage extends StatelessWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                SizedBox(height: 40),
-                SizedBox(
-                  width: double.infinity,
-                  child: Center(
-                    child: ResponsiveUtils.buildHeroContainer(
-                      context: context,
-                      child: HeroSection(key: controller.heroKey),
+                // Hero Section - handles its own padding
+                Center(
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxWidth: ResponsiveUtils.getMaxContentWidth(context),
                     ),
+                    child: HeroSection(key: controller.heroKey),
                   ),
                 ),
 
-                SizedBox(
-                  height: ResponsiveUtils.getVerticalSpacing(context) * 2,
+                SizedBox(height: ResponsiveUtils.getVerticalSpacing(context)),
+
+                // Services Section - handles its own padding
+                Center(
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxWidth: ResponsiveUtils.getMaxContentWidth(context),
+                    ),
+                    child: ServicesSection(key: controller.servicesKey),
+                  ),
                 ),
 
-                // Main content sections with better responsive layout
+                SizedBox(height: ResponsiveUtils.getVerticalSpacing(context)),
+
+                // Projects Section
                 _buildContentSection(
                   context: context,
                   child: ProjectsSection(key: controller.projectsKey),
                 ),
 
-                SizedBox(
-                  height: ResponsiveUtils.getVerticalSpacing(context) * 2,
+                SizedBox(height: ResponsiveUtils.getVerticalSpacing(context)),
+
+                // Skills Section - handles its own padding
+                Center(
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxWidth: ResponsiveUtils.getMaxContentWidth(context),
+                    ),
+                    child: SkillsSection(key: controller.skillsKey),
+                  ),
                 ),
 
-                _buildContentSection(
-                  context: context,
-                  child: SkillsSection(key: controller.skillsKey),
-                ),
-
-                SizedBox(
-                  height: ResponsiveUtils.getVerticalSpacing(context) * 2,
-                ),
+                SizedBox(height: ResponsiveUtils.getVerticalSpacing(context)),
 
                 _buildContentSection(
                   context: context,
@@ -176,6 +187,12 @@ class PortfolioPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
+            _buildDrawerItem(
+              'Services',
+              'services',
+              Icons.design_services,
+              controller,
+            ),
             _buildDrawerItem('Projects', 'projects', Icons.work, controller),
             _buildDrawerItem('Skills', 'skills', Icons.star, controller),
             _buildDrawerItem(
