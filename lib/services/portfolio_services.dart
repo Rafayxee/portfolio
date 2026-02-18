@@ -11,6 +11,7 @@ class PortfolioService extends GetxService {
     return [
       Project(
         title: 'Mobile App for Fitness Tracking',
+        category: 'Cross Platform',
         description:
             'A comprehensive fitness tracking app with user authentication, workout logging, progress visualization, and social features.',
         imageUrl:
@@ -21,6 +22,7 @@ class PortfolioService extends GetxService {
       ),
       Project(
         title: 'E-commerce App with Flutter',
+        category: 'Cross Platform',
         description:
             'A full-featured e-commerce application with product listings, shopping cart, secure payment integration, and order management.',
         imageUrl:
@@ -31,6 +33,7 @@ class PortfolioService extends GetxService {
       ),
       Project(
         title: 'Social Media App with Real-time Updates',
+        category: 'Cross Platform',
         description:
             'A modern social media platform with user profiles, posts, real-time messaging, and live updates using Firebase.',
         imageUrl:
